@@ -1,0 +1,2 @@
+export CACHE_REDIS_CLUSTER=myrediscluster-redis-cluster:6379
+export CACHE_REDIS_PASSWORD=IZ6oBiLFLE

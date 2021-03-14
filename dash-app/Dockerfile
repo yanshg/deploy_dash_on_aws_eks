@@ -4,4 +4,4 @@ WORKDIR /app
 RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 EXPOSE 8050
-CMD python ./index.py
+CMD bash ./startup.sh

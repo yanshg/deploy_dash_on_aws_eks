@@ -1,5 +1,6 @@
 import datetime as dt
 
+import os
 import dash
 import dash_core_components as dcc
 import dash_html_components as html
@@ -11,10 +12,21 @@ from flask_caching import Cache
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
-cache = Cache(app.server, config={
-    'CACHE_TYPE': 'filesystem',
-    'CACHE_DIR': 'cache-directory'
-})
+
+redis_cluster=os.environ.get('CACHE_REDIS_CLUSTER', '')
+redis_password=os.environ.get('CACHE_REDIS_PASSWORD', '')
+if redis_cluster:
+    cache = Cache(app.server, config={
+        'CACHE_TYPE': 'RedisClusterCache',
+        'CACHE_KEY_PREFIX': '_markettemp_',
+        'CACHE_REDIS_CLUSTER': redis_cluster,
+        'CACHE_REDIS_PASSWORD': redis_password
+    })
+else:
+    cache = Cache(app.server, config={
+        'CACHE_TYPE': 'filesystem',
+        'CACHE_DIR': 'cache-directory'
+    })
 
 TIMEOUT = 60
 
@@ -86,4 +98,4 @@ def update_live_graph(value):
 
 
 if __name__ == '__main__':
-    app.run_server(host='0.0.0.0', debug=True)
+    app.run_server(host='0.0.0.0', port=8080, debug=True)

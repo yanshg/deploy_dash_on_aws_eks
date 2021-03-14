@@ -9,3 +9,5 @@ wordcloud
 pybase64
 numpy
 pandas
+redis
+redis-py-cluster
