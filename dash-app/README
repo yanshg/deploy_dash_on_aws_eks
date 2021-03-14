@@ -16,7 +16,7 @@ Visit https://artifacthub.io, search package you want, like: memcached
 gcloud auth login
 gcloud container clusters get-credentials marketemp-gke --zone=us-west1-a
 kubectl get nodes
-kuectl get pods
+kubectl get pods
 
 
 
@@ -57,7 +57,7 @@ helm delete myrediscluster
 
 
 
-References
+References:
 
 - https://flask-caching.readthedocs.io/en/latest/
 - https://github.com/sh4nks/flask-caching/blob/master/flask_caching/backends/rediscache.py
