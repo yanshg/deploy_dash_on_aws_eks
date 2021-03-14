@@ -45,7 +45,7 @@ OK
 
 If redis-cluster client pod is already running, run the following command to run into the redis-cluster docker
 
-Kubectl exec -it myrediscluster-redis-cluster-client -- bash
+kubectl exec -it myrediscluster-redis-cluster-client -- bash
 
 
 
