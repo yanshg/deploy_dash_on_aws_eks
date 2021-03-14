@@ -64,5 +64,8 @@ References
 - https://redis.io/topics/cluster-spec
 - https://redis.io/topics/cluster-tutorial
 - https://dash.plotly.com/performance
+- https://pythonhosted.org/Flask-Cache/
+- https://redis-py-cluster.readthedocs.io/en/stable/index.html
+
 
 
