@@ -1,0 +1,55 @@
+1. Install helm
+
+curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
+chmod 700 get_helm.sh
+./get_helm.sh
+		
+helm search hub redis
+helm search hub redis-cluster
+
+Visit https://artifacthub.io, search package you want, like: memcached
+
+
+2. Start GCP Kubenetes Cluster
+
+
+gcloud auth login
+gcloud container clusters get-credentials marketemp-gke --zone=us-west1-a
+kubectl get nodes
+kuectl get pods
+
+
+
+3. Install redis-cluster
+
+
+helm repo add bitnami https://charts.bitnami.com/bitnami
+helm install myrediscluster bitnami/redis-cluster
+kubectl get pods
+
+
+4. Check redis-cluster healthy
+ 
+export REDIS_PASSWORD=$(kubectl get secret --namespace "default" myrediscluster-redis-cluster -o jsonpath="{.data.redis-password}" | base64 --decode)
+		
+kubectl run --namespace default myrediscluster-redis-cluster-client --rm --tty -i --restart='Never' --env REDIS_PASSWORD=$REDIS_PASSWORD --image docker.io/bitnami/redis-cluster:6.0.12-debian-10-r0 -- bash
+If you don't see a command prompt, try pressing enter.
+I have no name!@myrediscluster-redis-cluster-client:/$ redis-cli -c -h myrediscluster-redis-cluster -a $REDIS_PASSWORD
+Warning: Using a password with '-a' or '-u' option on the command line interface may not be safe.myrediscluster-redis-cluster:6379> set mykey 'hello'
+-> Redirected to slot [14687] located at 10.88.2.19:6379
+OK
+10.88.2.19:6379> get mykey
+"hello"
+
+
+
+If redis-cluster client pod is already running, run the following command to run into the redis-cluster docker
+
+Kubectl exec -it myrediscluster-redis-cluster-client -- bash
+
+
+
+5. Uninstall redis-cluster
+
+helm delete myrediscluster
+
