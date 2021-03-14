@@ -53,3 +53,16 @@ kubectl exec -it myrediscluster-redis-cluster-client -- bash
 
 helm delete myrediscluster
 
+
+
+
+
+References
+
+- https://flask-caching.readthedocs.io/en/latest/
+- https://github.com/sh4nks/flask-caching/blob/master/flask_caching/backends/rediscache.py
+- https://redis.io/topics/cluster-spec
+- https://redis.io/topics/cluster-tutorial
+- https://dash.plotly.com/performance
+
+
